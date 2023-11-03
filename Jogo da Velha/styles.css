@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css?family=Suez+One');
+
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family:Arial;
+	background-color: #FFC0CB;
+}
+
+
+
+
+
+#title{
+    font-family: "Suez One", serif;
+    font-weight: bold;
+    text-align: center;
+    font-size: 35px;
+    color: #FF69B4;
+	;
+}
+
+.tabuleiro {
+    display: grid;  
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 10px;
+    margin-bottom: 20px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    cursor: pointer;
+}
+
+.botao-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.botoes {
+    display: flex;
+    gap: 10px;
+}
+
+
+#reset{
+    box-shadow: 0px 10px 14px -7px #CD5C5C;
+	background:linear-gradient(to bottom, #FF1493 5%, #C71585 100%);
+	background-color:#599bb3;
+	border-radius:8px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:7px 20px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #3d768a;
+}
+
+#reset:hover {
+	background:linear-gradient(to bottom, #C71585 5%, #FF1493 100%);
+	background-color:#408c99;
+}
+#reset:active {
+	position:relative;
+	top:1px;
+}
+
+#playIA{
+    box-shadow: 0px 10px 14px -7px #CD5C5C;
+	background:linear-gradient(to bottom, #FF1493 5%, #C71585 100%);
+	background-color:#599bb3;
+	border-radius:8px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:7px 20px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #3d768a;
+}
+
+#playIA:hover {
+	background:linear-gradient(to bottom, #C71585 5%, #FF1493 100%);
+	background-color:#408c99;
+}
+#playIA:active {
+	position:relative;
+	top:1px;
+}
+
+#playPlayer{
+    box-shadow: 0px 10px 14px -7px #CD5C5C;
+	background:linear-gradient(to bottom, #FF1493 5%, #C71585 100%);
+	background-color:#599bb3;
+	border-radius:8px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:7px 20px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #3d768a;
+}
+
+#playPlayer:hover {
+	background:linear-gradient(to bottom, #C71585 5%, #FF1493 100%);
+	background-color:#408c99;
+}
+#playPlayer:active {
+	position:relative;
+	top:1px;
+}

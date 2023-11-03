@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css" media="screen" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <title>Jogo da Velha</title>
+</head>
+
+<body>
+    <h1 id="title">JOGO DA VELHA</h1>
+    <div class="tabuleiro">
+        <div class="cell" id="0"></div>
+        <div class="cell" id="1"></div>
+        <div class="cell" id="2"></div>
+        <div class="cell" id="3"></div>
+        <div class="cell" id="4"></div>
+        <div class="cell" id="5"></div>
+        <div class="cell" id="6"></div>
+        <div class="cell" id="7"></div>
+        <div class="cell" id="8"></div>
+    </div>
+
+    <div class="botao-container">
+        <button id="reset">Reiniciar Jogo</button>
+        <button id="playIA">Jogar contra IA</button>
+        <button id="playPlayer">Jogador vs Jogador</button>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            const cells = $('.cell');
+            const resetButton = $('#reset');
+            let playerAtual = 'X';
+            let iaAtiva = false;
+
+            function checaVencedor() {
+                const condicaoVitoria = [
+                    [0, 1, 2], [3, 4, 5], [6, 7, 8], //Vence pelas linhas horizontais
+                    [0, 3, 6], [1, 4, 7], [2, 5, 8], //Vence pelas colunas verticais
+                    [0, 4, 8], [2, 4, 6] // Vence pelas diagonais
+                ];
+
+                for (const condicao of condicaoVitoria) {
+                    const [a, b, c] = condicao;
+                    if (cells[a].textContent && cells[a].textContent === cells[b].textContent && cells[a].textContent === cells[c].textContent) {
+                        return cells[a].textContent; //Traz o vencedor 
+                    }
+                }
+
+                if ([...cells].every(cell => cell.textContent !== '')) {
+                    return 'Empate';
+                }
+
+                return null;
+            }
+
+            function identificadorClick() {
+                const cell = $(this);
+                if (cell.text() === '' && !checaVencedor()) {
+                    cell.text(playerAtual);
+                    const vencedor = checaVencedor();
+                    if (vencedor) {
+                        if (vencedor === 'Empate') {
+                            alert('O jogo terminou em empate.')
+                        } else {
+                            alert(`O jogador ${vencedor} venceu o jogo!`);
+                        }
+                        resetarJogo();
+                        if (iaAtiva && playerAtual === 'O') {
+                            setTimeout(jogadaIA, 500); // Atrasa a jogada da IA em 500ms
+                        }
+                    } else {
+                        playerAtual = playerAtual === 'X' ? 'O' : 'X';
+                        if (iaAtiva && playerAtual === 'O') {
+                            setTimeout(jogadaIA, 500); // Atrasa a jogada da IA em 500ms
+                        }
+                    }
+                }
+            }
+
+            function resetarJogo() {
+                cells.text('');
+                playerAtual = 'X';
+            }
+
+            function jogadaIA() {
+                const celulasVazias = $('.cell').filter(function () {
+                    return $(this).text() === '';
+                });
+                const celulaAleatoria = celulasVazias[Math.floor(Math.random() * celulasVazias.length)];
+                $(celulaAleatoria).text(playerAtual);
+                const vencedor = checaVencedor();
+                if (vencedor) {
+                    if (vencedor === 'Empate') {
+                        alert('O jogo terminou em empate.')
+                    } else {
+                        alert(`O jogador ${vencedor} venceu o jogo!`);
+                    }
+                    resetarJogo();
+                    if (iaAtiva && playerAtual === 'O') {
+                        setTimeout(jogadaIA, 500); // Atrasa a jogada da IA em 500ms
+                    }
+                } else {
+                    playerAtual = playerAtual === 'X' ? 'O' : 'X';
+                }
+            }
+
+            cells.on('click', identificadorClick);
+            resetButton.on('click', resetarJogo);
+
+            $('#playIA').on('click', function () {
+                iaAtiva = true;
+                resetarJogo();
+                if (playerAtual === 'O') {
+                    setTimeout(jogadaIA, 500); // Atrasa a jogada da IA em 500ms
+                }
+            });
+
+            $('#playPlayer').on('click', function () {
+                iaAtiva = false;
+                resetarJogo();
+            });
+        });
+    </script>
+</body>
+
+</html>
